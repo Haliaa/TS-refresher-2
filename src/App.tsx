@@ -1,21 +1,28 @@
-import Header from './components/Header.tsx';
-import Shop from './components/Shop.tsx';
-import Product from './components/Product.tsx';
-import { DUMMY_PRODUCTS } from './dummy-products.ts';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+
+import HomePage from './pages/Home.tsx';
+import SessionsPage from './pages/Sessions.tsx';
+import SessionPage from './pages/Session.tsx';
+import Root from './pages/Root.tsx';
+
+const Router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Root />,
+    children: [
+      {
+        index: true,
+        element: <HomePage />,
+      },
+      { path: 'sessions', element: <SessionsPage /> },
+      { path: 'sessions/:id', element: <SessionPage /> },
+    ],
+  },
+]);
 
 function App() {
-  return (
-    <>
-      <Header />
-      <Shop>
-        {DUMMY_PRODUCTS.map((product) => (
-          <li key={product.id}>
-            <Product {...product} />
-          </li>
-        ))}
-      </Shop>
-    </>
-  );
+  
+  return <RouterProvider router={Router} />;
 }
 
 export default App;

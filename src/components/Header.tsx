@@ -1,32 +1,51 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
-import Cart from "./Cart.tsx";
-import { useCartSelector } from "../store/hooks.ts";
+import { Button } from "./UI/Button.js";
+import { UpcomingSessions } from "./UpcomingSessions.js";
 
 export default function Header() {
-  const [cartIsVisible, setCartIsVisible] = useState(false);
-  const cartQnt = useCartSelector((state) =>
-    state.cart.items.reduce((total, item) => total + item.quantity, 0)
-  );
-  function handleOpenCartClick() {
-    setCartIsVisible(true);
+  const [upcomingSessionsVisible, setUpcomingSessionsVisible] = useState(false);
+
+  function showUpcomingSessions() {
+    setUpcomingSessionsVisible(true);
   }
 
-  function handleCloseCartClick() {
-    setCartIsVisible(false);
+  function hideUpcomingSessions() {
+    setUpcomingSessionsVisible(false);
   }
 
   return (
     <>
-      {cartIsVisible && <Cart onClose={handleCloseCartClick} />}
+      {upcomingSessionsVisible && (
+        <UpcomingSessions onClose={hideUpcomingSessions} />
+      )}
       <header id="main-header">
-        <div id="main-title">
-          <img src="logo.png" alt="Elegant model" />
-          <h1>Elegant Redux</h1>
-        </div>
-        <p>
-          <button onClick={handleOpenCartClick}>Cart ({cartQnt})</button>
-        </p>
+        <h1>ReactMentoring</h1>
+        <nav>
+          <ul>
+            <li>
+              <NavLink
+                to="/"
+                className={({ isActive }) => (isActive ? "active" : "")}
+                end
+              >
+                Our Mission
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/sessions"
+                className={({ isActive }) => (isActive ? "active" : "")}
+              >
+                Browse Sessions
+              </NavLink>
+            </li>
+            <li>
+              <Button onClick={showUpcomingSessions}>Upcoming Sessions</Button>
+            </li>
+          </ul>
+        </nav>
       </header>
     </>
   );
