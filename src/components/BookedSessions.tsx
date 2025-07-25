@@ -1,15 +1,13 @@
 import { useEffect, useRef } from "react";
 
-// import UpcomingSession from "./UpcomingSession.tsx";
 import { useSessionsContext } from "../store/session.context.tsx";
-import { Button } from "./UI/Button.tsx";
-import { Modal, type ModalHandle } from "./UI/Modal.tsx";
+import { Button, Modal, type ModalHandle, BookedSession } from "../components";
 
 type UpcomingSessionsProps = {
-  onClose: () => void; // onClose is accepted to "tell" the parent component that the UpcomingSessions component should be removed from the DOM
+  onClose: () => void; // onClose is accepted to "tell" the parent component that the BookedSessions component should be removed from the DOM
 };
 
-export const UpcomingSessions = ({ onClose }: UpcomingSessionsProps) => {
+export const BookedSessions = ({ onClose }: UpcomingSessionsProps) => {
   const modal = useRef<ModalHandle>(null);
   const sessionsCtx = useSessionsContext();
 
@@ -26,16 +24,16 @@ export const UpcomingSessions = ({ onClose }: UpcomingSessionsProps) => {
     sessionsCtx.cancelSession(sessionId);
   }
 
-  // const hasSessions = sessionsCtx.upcomingSessions.length > 0;
+  const hasSessions = sessionsCtx.bookedSessions.length > 0;
 
   return (
     <Modal ref={modal} onClose={onClose}>
       <h2>Upcoming Sessions</h2>
-      {/* {hasSessions && (
+      {hasSessions && (
         <ul>
-          {sessionsCtx.upcomingSessions.map((session) => (
+          {sessionsCtx.bookedSessions.map((session) => (
             <li key={session.id}>
-              <UpcomingSession
+              <BookedSession
                 session={session}
                 onCancel={() => handleCancelSession(session.id)}
               />
@@ -46,7 +44,7 @@ export const UpcomingSessions = ({ onClose }: UpcomingSessionsProps) => {
       {!hasSessions && <p>No upcoming sessions.</p>}
       <p className="actions">
         <Button onClick={onClose}>Close</Button>
-      </p> */}
+      </p>
     </Modal>
   );
 };

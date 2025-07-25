@@ -5,7 +5,7 @@ import { Button } from "../components/UI/Button.tsx";
 import { useState } from "react";
 import { BookSession } from "../components/BookSession.tsx";
 
-export default function SessionPage() {
+export const SessionPage = () => {
   const params = useParams<{ id: string }>();
   const [isBooking, setIsBooking] = useState(false);
 
@@ -48,4 +48,4 @@ export default function SessionPage() {
       </article>
     </main>
   );
-}
+};

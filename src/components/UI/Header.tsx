@@ -1,10 +1,8 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { BookedSessions, Button } from "../../components";
 
-import { Button } from "./UI/Button.js";
-import { UpcomingSessions } from "./UpcomingSessions.js";
-
-export default function Header() {
+export const Header = () => {
   const [upcomingSessionsVisible, setUpcomingSessionsVisible] = useState(false);
 
   function showUpcomingSessions() {
@@ -18,7 +16,7 @@ export default function Header() {
   return (
     <>
       {upcomingSessionsVisible && (
-        <UpcomingSessions onClose={hideUpcomingSessions} />
+        <BookedSessions onClose={hideUpcomingSessions} />
       )}
       <header id="main-header">
         <h1>ReactMentoring</h1>
@@ -49,4 +47,4 @@ export default function Header() {
       </header>
     </>
   );
-}
+};

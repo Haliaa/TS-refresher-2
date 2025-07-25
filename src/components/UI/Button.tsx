@@ -21,7 +21,7 @@ const isLinkProps = (props: Props): props is LinkProps => {
 };
 
 export const Button = (props: Props) => {
-  const customClasses = "button" + (props.textOnly ? "button--text-only" : "");
+  const customClasses = "button" + (props.textOnly ? " button--text-only" : "");
   if (isLinkProps(props)) {
     const { children, textOnly, ...elseProps } = props;
     return (

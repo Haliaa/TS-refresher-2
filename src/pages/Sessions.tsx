@@ -1,7 +1,7 @@
 import { SessionItem } from "../components/SessionItem.tsx";
-import { SESSIONS } from "../dummy-sessions.ts"; // normally, we would probably load that from a server
+import { SESSIONS } from "../dummy-sessions.ts";
 
-export default function SessionsPage() {
+export const SessionsPage = () => {
   return (
     <main id="sessions-page">
       <header>
@@ -21,4 +21,4 @@ export default function SessionsPage() {
       </ul>
     </main>
   );
-}
+};

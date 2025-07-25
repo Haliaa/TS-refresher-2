@@ -1,4 +1,4 @@
-import { Button } from "./UI/Button";
+import { Button } from "../components";
 
 type SessionItemProps = {
   id: string;

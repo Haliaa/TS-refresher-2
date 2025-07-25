@@ -7,9 +7,9 @@ type Props = {
 
 export const Input = ({ id, label, ...props }: Props) => {
   return (
-    <div>
+    <p>
       <label htmlFor={id}>{label}</label>
-      <input id={id} {...props} />
-    </div>
+      <input id={id} {...props} style={{ marginInline: "0.5em" }} />
+    </p>
   );
 };

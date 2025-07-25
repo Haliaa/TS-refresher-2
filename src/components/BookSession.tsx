@@ -1,8 +1,6 @@
 import { Session, useSessionsContext } from "../store/session.context";
-import { Modal, type ModalHandle } from "./UI/Modal";
-import { Input } from "./UI/Input";
-import { Button } from "./UI/Button";
-import { FormEvent, useRef } from "react";
+import { Button, Input, Modal, type ModalHandle } from "../components";
+import { FormEvent, useEffect, useRef } from "react";
 
 type Props = {
   session: Session;
@@ -12,6 +10,12 @@ type Props = {
 export const BookSession = ({ session, closeModal }: Props) => {
   const modalRef = useRef<ModalHandle>(null);
   const sessionsCtx = useSessionsContext();
+
+  useEffect(() => {
+    if (modalRef.current) {
+      modalRef.current.open();
+    }
+  }, []);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     const formData = new FormData(e.currentTarget);

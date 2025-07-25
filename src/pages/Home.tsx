@@ -1,8 +1,8 @@
-import studentsImg from '../assets/students.jpg';
-import listImg from '../assets/list.jpg';
-import certificateImg from '../assets/certificate.jpg';
+import studentsImg from "../assets/students.jpg";
+import listImg from "../assets/list.jpg";
+import certificateImg from "../assets/certificate.jpg";
 
-export default function HomePage() {
+export const HomePage = () => {
   return (
     <main id="home-page">
       <h2>Our Mission: Your Success</h2>
@@ -42,4 +42,4 @@ export default function HomePage() {
       </section>
     </main>
   );
-}
+};

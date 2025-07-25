@@ -10,17 +10,17 @@ export type Session = {
   image: string;
 };
 
-type Sessions = {
-  sessions: Session[];
+type BookedSessions = {
+  bookedSessions: Session[];
 };
-const initialState: Sessions = {
-  sessions: [],
+const initialState: BookedSessions = {
+  bookedSessions: [],
 };
 type Props = {
   children: ReactNode;
 };
 
-type SessionsContextValue = Sessions & {
+type SessionsContextValue = BookedSessions & {
   bookSession: (session: Session) => void;
   cancelSession: (id: string) => void;
 };
@@ -37,18 +37,24 @@ type CancelSessionAction = { type: "CANCEL_SESSION"; payload: { id: string } };
 type AddSessionAction = { type: "ADD_SESSION"; payload: Session };
 type Action = AddSessionAction | CancelSessionAction;
 
-const sessionsReducer = (state: Sessions, action: Action): Sessions => {
+const sessionsReducer = (
+  state: BookedSessions,
+  action: Action
+): BookedSessions => {
   if (action.type === "CANCEL_SESSION") {
-    const sessionIndex = state.sessions.findIndex(
+    const sessionIndex = state.bookedSessions.findIndex(
       (s) => s.id === action.payload.id
     );
 
-    return { ...state, sessions: state.sessions.splice(sessionIndex, 1) };
+    return {
+      ...state,
+      bookedSessions: state.bookedSessions.splice(sessionIndex, 1),
+    };
   }
   if (action.type === "ADD_SESSION") {
     return {
       ...state,
-      sessions: [...state.sessions, { ...action.payload }],
+      bookedSessions: [...state.bookedSessions, { ...action.payload }],
     };
   }
   return state;
@@ -57,7 +63,7 @@ export const SessionsContextProvider = ({ children }: Props) => {
   const [sessionsState, dispatch] = useReducer(sessionsReducer, initialState);
 
   const ctx: SessionsContextValue = {
-    sessions: sessionsState.sessions,
+    bookedSessions: sessionsState.bookedSessions,
     bookSession(session: Session) {
       dispatch({ type: "ADD_SESSION", payload: session });
     },
